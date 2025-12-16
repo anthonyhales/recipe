@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card mb-4">
+  <div class="card-body">
+    <form method="post">
+      <div class="mb-3">
+        <label class="form-label">Start URL</label>
+        <input type="url" name="url" class="form-control" required>
+      </div>
+      <button class="btn btn-primary">Run pre-check</button>
+    </form>
+  </div>
+</div>
+{% if results %}
+<a href="/download/csv" class="btn btn-sm btn-outline-secondary">Download CSV</a>
+<a href="/download/txt" class="btn btn-sm btn-outline-secondary">Download TXT</a>
+<table class="table table-striped mt-3">
+<thead><tr><th>Recipe</th><th>URL</th></tr></thead>
+<tbody>
+{% for r in results %}
+<tr>
+<td>{{ "✓" if r.is_recipe else "" }}</td>
+<td><a href="{{ r.url }}" target="_blank">{{ r.url }}</a></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endif %}
+{% endblock %}
