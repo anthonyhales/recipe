@@ -1,9 +1,12 @@
-version: "3.8"
 
+version: "3.8"
 services:
   recipe-crawl:
-    container_name: recipe-crawl
     build: .
     ports:
       - "5000:5000"
+    volumes:
+      - recipe_data:/app
     restart: unless-stopped
+volumes:
+  recipe_data:
